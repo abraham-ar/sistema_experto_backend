@@ -1,0 +1,9 @@
+#Ignora cache de ejecucion
+__pycache__/
+*.pyc
+
+#Ignorar entorno virtual
+venv/
+
+# Ignorar archivos temporales de VS Code
+.vscode/
