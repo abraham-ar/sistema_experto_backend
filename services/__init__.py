@@ -1,1 +1,2 @@
 from .reglas import get_reglas, get_regla, validate_regla, add_regla, update_regla, delete_regla
+from .ejercicios import get_ejercicios, get_ejercicio, validate_ejercicio, add_ejercicio, update_ejercicio, delete_ejercicio

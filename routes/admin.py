@@ -4,7 +4,8 @@ from config.db import get_db
 from schemas import RoutineCreate, RoutineUpdate, RoutineResponse
 from typing import List
 from schemas import RuleResponse, RuleCreate, RuleUpdate
-from services import get_reglas, get_regla, validate_regla, add_regla, update_regla, delete_regla
+from services import get_reglas, get_regla, validate_regla, add_regla, update_regla, delete_regla, get_ejercicios, get_ejercicio, validate_ejercicio, add_ejercicio, update_ejercicio, delete_ejercicio
+from schemas import EjercicioResponse, EjercicioCreate, EjercicioUpdate
 
 admin = APIRouter(prefix="/admin", tags=["admin"])
 
@@ -65,7 +66,7 @@ def modificar_regla(id: int, datos: RuleUpdate, admin_id: str = Header(...), adm
 #   DELETE /admin/rules/{id}
 # ============================================
 
-@admin.delete("rules/{id}")
+@admin.delete("/rules/{id}")
 def eliminar_regla(id: int, admin_id: str = Header(...), admin_user: str = Header(...)):
     validar_admin(admin_id, admin_user)
 
@@ -77,3 +78,60 @@ def eliminar_regla(id: int, admin_id: str = Header(...), admin_user: str = Heade
 
     return {"message": "Regla eliminada correctamente"}
 
+# =======================================================
+#   GET /admin/exercises
+# =======================================================
+
+@admin.get("/exercises", response_model=List[EjercicioResponse])
+def listar_ejercicios(admin_id: str = Header(...), admin_user: str = Header(...)):
+    validar_admin(admin_id, admin_user)
+    return get_ejercicios()
+
+
+# =======================================================
+#   POST /admin/exercises
+# =======================================================
+
+@admin.post("/exercises", response_model=EjercicioResponse)
+def crear_ejercicio(data: EjercicioCreate, admin_id: str = Header(...), admin_user: str = Header(...)):
+    validar_admin(admin_id, admin_user)
+
+    nuevo = data.dict()
+
+    if not validate_ejercicio(nuevo):
+        raise HTTPException(status_code=400, detail="El ejercicio ya existe")
+
+    return add_ejercicio(nuevo)
+
+
+# =======================================================
+#   PUT /admin/exercises/{id}
+# =======================================================
+
+@admin.put("/exercises/{id}", response_model=EjercicioResponse)
+def modificar_ejercicio(id: int, datos: EjercicioUpdate, admin_id: str = Header(...), admin_user: str = Header(...)):
+    validar_admin(admin_id, admin_user)
+
+    existente = get_ejercicio(id)
+    if not existente:
+        raise HTTPException(status_code=404, detail="Ejercicio no encontrado")
+
+    actualizado = update_ejercicio(id, datos.dict())
+    return actualizado
+
+
+# =======================================================
+#   DELETE /admin/exercises/{id}
+# =======================================================
+
+@admin.delete("/exercises/{id}")
+def eliminar_ejercicio(id: int, admin_id: str = Header(...), admin_user: str = Header(...)):
+    validar_admin(admin_id, admin_user)
+
+    if not get_ejercicio(id):
+        raise HTTPException(status_code=404, detail="Ejercicio no encontrado")
+
+    if not delete_ejercicio(id):
+        raise HTTPException(status_code=400, detail="No se pudo eliminar")
+
+    return {"message": "Ejercicio eliminado correctamente"}

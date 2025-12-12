@@ -11,3 +11,5 @@ from .Auth import (
 from .Rutina import RoutineBase, RoutineCreate, RoutineUpdate, RoutineResponse
 
 from .Rule import RuleBase, RuleCreate, RuleUpdate, RuleResponse
+
+from .Exercise import EjercicioBase, EjercicioCreate, EjercicioUpdate, EjercicioResponse
