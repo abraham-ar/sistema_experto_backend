@@ -18,5 +18,10 @@
     "id": 4,
     "condicion": "imc >= 30",
     "clasificacion": "Obesidad"
+  },
+  {
+    "condicion": "imc == 15",
+    "clasificacion": "Desnutricion",
+    "id": 5
   }
 ]

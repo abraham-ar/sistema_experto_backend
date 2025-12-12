@@ -83,3 +83,21 @@ def delete_ejercicio(ej_id: int) -> bool:
 
     save_ejercicios(nuevos)
     return True
+
+#========================================================
+#Metodo para verificar que no haya ejercicios repetidos
+#=======================================================
+def ejercicio_repetido(nuevo: dict) -> bool:
+    ejercicios = load_ejercicios()
+
+    for e in ejercicios:
+        if (
+            e["ejercicio"].lower() == nuevo["ejercicio"].lower()
+            and e["series"] == nuevo["series"]
+            and e["repeticiones"] == nuevo["repeticiones"]
+            and e["objetivo"].lower() == nuevo["objetivo"].lower()
+            and e["genero"].lower() == nuevo["genero"].lower()
+        ):
+            return True
+
+    return False

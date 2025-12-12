@@ -1,11 +1,14 @@
 from fastapi import APIRouter, Depends, HTTPException, status, Query, Header
 from sqlalchemy.orm import Session
 from config.db import get_db
-from schemas import RoutineCreate, RoutineUpdate, RoutineResponse
 from typing import List
 from schemas import RuleResponse, RuleCreate, RuleUpdate
-from services import get_reglas, get_regla, validate_regla, add_regla, update_regla, delete_regla, get_ejercicios, get_ejercicio, validate_ejercicio, add_ejercicio, update_ejercicio, delete_ejercicio
 from schemas import EjercicioResponse, EjercicioCreate, EjercicioUpdate
+from schemas import RutinaResponse, RutinaCreate, RutinaUpdate
+from services import get_reglas, get_regla, validate_regla, add_regla, update_regla, delete_regla
+from services import get_ejercicios, get_ejercicio, validate_ejercicio, add_ejercicio, update_ejercicio, delete_ejercicio, add_ejercicio_rutina, ejercicio_repetido
+from services import get_rutinas, get_rutina, validate_rutina, add_rutina, update_rutina, delete_rutina, delete_ejercicio_from_rutina, ejercicio_usado_en_otras_rutinas
+
 
 admin = APIRouter(prefix="/admin", tags=["admin"])
 
@@ -135,3 +138,142 @@ def eliminar_ejercicio(id: int, admin_id: str = Header(...), admin_user: str = H
         raise HTTPException(status_code=400, detail="No se pudo eliminar")
 
     return {"message": "Ejercicio eliminado correctamente"}
+
+# =======================================================
+#   GET /admin/routines
+# =======================================================
+
+@admin.get("/routines", response_model=List[RutinaResponse])
+def listar_rutinas(admin_id: str = Header(...), admin_user: str = Header(...)):
+    validar_admin(admin_id, admin_user)
+    return get_rutinas()
+
+
+# =======================================================
+#   POST /admin/routines
+# =======================================================
+
+@admin.post("/routines", response_model=RutinaResponse)
+def crear_rutina(data: RutinaCreate, admin_id: str = Header(...), admin_user: str = Header(...)):
+    validar_admin(admin_id, admin_user)
+
+    if not validate_rutina(data.rutina):
+        raise HTTPException(status_code=400, detail="Ya existe una rutina con ese nombre")
+
+    rutina_obj = data.dict()
+    rutina_obj["ejercicios"] = []  # se crea vacía
+
+    nueva = add_rutina(rutina_obj)
+
+    # devolvemos versión expandida (ejercicios completos)
+    return {
+        **nueva,
+        "ejercicios": []
+    }
+
+
+# =======================================================
+#   PUT /admin/routines/{rutina}
+# =======================================================
+
+@admin.put("routines/{rutina}", response_model=RutinaResponse)
+def modificar_rutina(rutina: str, cambios: RutinaUpdate, admin_id: str = Header(...), admin_user: str = Header(...)):
+    validar_admin(admin_id, admin_user)
+
+    existente = get_rutina(rutina)
+    if not existente:
+        raise HTTPException(status_code=404, detail="Rutina no encontrada")
+
+    modificada = update_rutina(rutina, cambios.dict())
+
+    # reconstruir ejercicios completos
+    from services.ejercicios import load_ejercicios
+    ejercicios = load_ejercicios()
+    ejercicios_map = {e["id"]: e for e in ejercicios}
+
+    return {
+        **modificada,
+        "ejercicios": [ejercicios_map[id] for id in modificada.get("ejercicios", []) if id in ejercicios_map]
+    }
+
+
+# =======================================================
+#   DELETE /admin/routines/{rutina}
+# =======================================================
+
+@admin.delete("routines/{rutina}")
+def eliminar_rutina(rutina: str, admin_id: str = Header(...), admin_user: str = Header(...)):
+    validar_admin(admin_id, admin_user)
+
+    if not get_rutina(rutina):
+        raise HTTPException(status_code=404, detail="Rutina no encontrada")
+
+    if not delete_rutina(rutina):
+        raise HTTPException(status_code=400, detail="No se pudo borrar la rutina")
+
+    return {"message": "Rutina eliminada correctamente"}
+
+# =====================================================
+# POST /admin/routines/{rutina}/exercises
+# =====================================================
+
+@admin.post("routines/{rutina}/exercises")
+def agregar_ejercicio(
+    rutina: str,
+    data: EjercicioCreate,
+    admin_id: str = Header(...),
+    admin_user: str = Header(...)
+):
+    validar_admin(admin_id, admin_user)
+
+    # 1. validar que la rutina exista
+    rutina_obj = get_rutina(rutina)
+    if not rutina_obj:
+        raise HTTPException(404, "La rutina no existe")
+
+    # 2. validar que el ejercicio no esté repetido
+    if ejercicio_repetido(data.dict()):
+        raise HTTPException(400, "Este ejercicio ya existe con los mismos datos")
+
+    # 3. crear ejercicio nuevo
+    new_id = add_ejercicio(data.dict())
+
+    # 4. asignarlo a la rutina
+    add_ejercicio_rutina(rutina, new_id)
+
+    return {"message": "Ejercicio agregado a la rutina", "id": new_id}
+
+
+# =====================================================
+# DELETE /admin/routines/{rutina}/exercises/{exercise_id}
+# =====================================================
+
+@admin.delete("routines/{rutina}/exercises/{exercise_id}")
+def eliminar_ejercicio(
+    rutina: str,
+    exercise_id: int,
+    admin_id: str = Header(...),
+    admin_user: str = Header(...)
+):
+    validar_admin(admin_id, admin_user)
+
+    # 1. validar rutina
+    rutina_obj = get_rutina(rutina)
+    if not rutina_obj:
+        raise HTTPException(404, "La rutina no existe")
+
+    # 2. validar ejercicio
+    ejercicio_obj = get_ejercicio(exercise_id)
+    if not ejercicio_obj:
+        raise HTTPException(404, "El ejercicio no existe")
+
+    # 3. eliminar ejercicio de la rutina
+    ok = delete_ejercicio_from_rutina(rutina, exercise_id)
+    if not ok:
+        raise HTTPException(400, "El ejercicio no está asignado a esta rutina")
+
+    # 4. si ninguna otra rutina lo usa → borrarlo del sistema
+    if not ejercicio_usado_en_otras_rutinas(rutina, exercise_id):
+        delete_ejercicio(exercise_id)
+
+    return {"message": "Ejercicio eliminado de la rutina correctamente"}
