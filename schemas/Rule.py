@@ -9,7 +9,7 @@ class RuleCreate(RuleBase):
     pass
 
 class RuleUpdate(RuleBase):
-    id: int
+    pass
 
 class RuleResponse(RuleBase):
     id: int

@@ -7,7 +7,7 @@ from schemas import EjercicioResponse, EjercicioCreate, EjercicioUpdate
 from schemas import RutinaResponse, RutinaCreate, RutinaUpdate
 from services import get_reglas, get_regla, validate_regla, add_regla, update_regla, delete_regla
 from services import get_ejercicios, get_ejercicio, validate_ejercicio, add_ejercicio, update_ejercicio, delete_ejercicio, add_ejercicio_rutina, ejercicio_repetido
-from services import get_rutinas, get_rutina, validate_rutina, add_rutina, update_rutina, delete_rutina, delete_ejercicio_from_rutina, ejercicio_usado_en_otras_rutinas
+from services import get_rutinas, get_rutina, validate_rutina, add_rutina, update_rutina, delete_rutina, delete_ejercicio_from_rutina, ejercicio_usado_en_otras_rutinas, get_rutinas_raw, delete_ejercicio_from_all_rutinas
 
 
 admin = APIRouter(prefix="/admin", tags=["admin"])
@@ -104,7 +104,37 @@ def crear_ejercicio(data: EjercicioCreate, admin_id: str = Header(...), admin_us
     if not validate_ejercicio(nuevo):
         raise HTTPException(status_code=400, detail="El ejercicio ya existe")
 
-    return add_ejercicio(nuevo)
+    nuevo_id = add_ejercicio(nuevo)["id"]
+
+    #=====MODIFICACION DEL ENDPOINT=======
+    # 3. Cargar rutinas
+    rutinas = get_rutinas_raw()  # función que solo lee rutinas.json
+
+    # 4. Buscar una rutina con coincidencia de tipo y genero
+    rutina_encontrada = None
+    for r in rutinas:
+        if (
+            r["tipo"].lower() == nuevo["objetivo"].lower()
+            and r["genero"].lower() == nuevo["genero"].lower()
+        ):
+            rutina_encontrada = r["rutina"]
+            break
+
+    if not rutina_encontrada:
+        raise HTTPException(
+            status_code=404,
+            detail="No existe ninguna rutina con el mismo tipo y género del ejercicio"
+        )
+
+    # 5. Agregar ejercicio a la rutina
+    add_ejercicio_rutina(rutina_encontrada, nuevo_id)
+
+    # 6. Respuesta final
+    return {
+        "id": nuevo_id,
+        **nuevo,
+        "asignado_a": rutina_encontrada
+    }
 
 
 # =======================================================
@@ -134,10 +164,17 @@ def eliminar_ejercicio(id: int, admin_id: str = Header(...), admin_user: str = H
     if not get_ejercicio(id):
         raise HTTPException(status_code=404, detail="Ejercicio no encontrado")
 
+    # 1. elimina el ejercicio de TODAS las rutinas
+    eliminadas = delete_ejercicio_from_all_rutinas(id)
+
+    # 2. elimina el ejercicio globalmente
     if not delete_ejercicio(id):
         raise HTTPException(status_code=400, detail="No se pudo eliminar")
 
-    return {"message": "Ejercicio eliminado correctamente"}
+    return {
+        "message": "Ejercicio eliminado correctamente",
+        "eliminado_de_rutinas": eliminadas
+    }
 
 # =======================================================
 #   GET /admin/routines

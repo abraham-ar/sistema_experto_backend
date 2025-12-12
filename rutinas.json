@@ -4,69 +4,119 @@
     "genero": "hombre",
     "rutina": "Ganar masa muscular - Hombre",
     "tipo": "Ganar masa muscular",
-    "ejercicios": [1, 2, 3, 4]
+    "ejercicios": [
+      1,
+      2,
+      3,
+      4
+    ]
   },
   {
     "clasificacion": "Bajo peso",
     "genero": "mujer",
     "rutina": "Ganar masa muscular - Mujer",
     "tipo": "Ganar masa muscular",
-    "ejercicios": [5, 6, 7, 8]
+    "ejercicios": [
+      5,
+      6,
+      7,
+      8
+    ]
   },
   {
     "clasificacion": "Normal",
     "genero": "hombre",
     "rutina": "Mantener peso - Hombre",
     "tipo": "Mantener peso",
-    "ejercicios": [9, 10, 11, 12]
+    "ejercicios": [
+      9,
+      10,
+      11,
+      12
+    ]
   },
   {
     "clasificacion": "Normal",
     "genero": "mujer",
     "rutina": "Mantener peso - Mujer",
     "tipo": "Mantener peso",
-    "ejercicios": [13, 14, 15, 16]
+    "ejercicios": [
+      13,
+      14,
+      15,
+      16
+    ]
   },
   {
     "clasificacion": "Normal",
     "genero": "hombre",
     "rutina": "Tonificar - Hombre",
     "tipo": "Tonificar",
-    "ejercicios": [17, 18, 19, 20]
+    "ejercicios": [
+      17,
+      18,
+      19,
+      20
+    ]
   },
   {
     "clasificacion": "Normal",
     "genero": "mujer",
     "rutina": "Tonificar - Mujer",
     "tipo": "Tonificar",
-    "ejercicios": [21, 22, 23, 24]
+    "ejercicios": [
+      21,
+      22,
+      23,
+      24
+    ]
   },
   {
     "clasificacion": "Sobrepeso",
     "genero": "hombre",
     "rutina": "Bajar de peso (sobrepeso) - Hombre",
     "tipo": "Bajar de peso (sobrepeso)",
-    "ejercicios": [25, 26, 27, 28]
+    "ejercicios": [
+      25,
+      26,
+      27,
+      28
+    ]
   },
   {
     "clasificacion": "Sobrepeso",
     "genero": "mujer",
     "rutina": "Bajar de peso (sobrepeso) - Mujer",
     "tipo": "Bajar de peso (sobrepeso)",
-    "ejercicios": [29, 30, 31, 32]
+    "ejercicios": [
+      29,
+      30,
+      31,
+      32
+    ]
   },
   {
     "clasificacion": "Obesidad",
     "genero": "hombre",
     "rutina": "Bajar de peso (obesidad) - Hombre",
     "tipo": "Bajar de peso (obesidad)",
-    "ejercicios": [33, 34, 35, 36]
+    "ejercicios": [
+      33,
+      34,
+      35,
+      36
+    ]
   },
   {
     "clasificacion": "Obesidad",
     "genero": "mujer",
     "rutina": "Bajar de peso (obesidad) - Mujer",
     "tipo": "Bajar de peso (obesidad)",
-    "ejercicios": [37, 38, 39, 40]
+    "ejercicios": [
+      37,
+      38,
+      39,
+      40
+    ]
   }
 ]

@@ -1,3 +1,3 @@
 from .reglas import get_reglas, get_regla, validate_regla, add_regla, update_regla, delete_regla
 from .ejercicios import get_ejercicios, get_ejercicio, validate_ejercicio, add_ejercicio, update_ejercicio, delete_ejercicio, ejercicio_repetido
-from .rutinas import get_rutinas, get_rutina, validate_rutina, add_rutina, update_rutina, delete_rutina, add_ejercicio_rutina, delete_ejercicio_from_rutina, ejercicio_usado_en_otras_rutinas
+from .rutinas import get_rutinas, get_rutina, validate_rutina, add_rutina, update_rutina, delete_rutina, add_ejercicio_rutina, delete_ejercicio_from_rutina, ejercicio_usado_en_otras_rutinas, get_rutinas_raw, delete_ejercicio_from_all_rutinas

@@ -45,6 +45,10 @@ def get_rutinas() -> List[dict]:
     return resultado
 
 
+#GET RUTINAS RAW
+def get_rutinas_raw() -> List[dict]:
+    return load_json(RUTA_RUTINAS)
+
 # =======================================================
 #   GET UNA RUTINA POR NOMBRE
 # =======================================================
@@ -139,6 +143,20 @@ def delete_ejercicio_from_rutina(nombre: str, ejercicio_id: int):
 
             return False
     return False
+
+def delete_ejercicio_from_all_rutinas(ejercicio_id: int) -> int:
+    rutinas = load_json(RUTA_RUTINAS)
+    eliminaciones = 0
+
+    for r in rutinas:
+        if ejercicio_id in r.get("ejercicios", []):
+            r["ejercicios"].remove(ejercicio_id)
+            eliminaciones += 1
+
+    if eliminaciones > 0:
+        save_json(RUTA_RUTINAS, rutinas)
+
+    return eliminaciones
 
 
 def ejercicio_usado_en_otras_rutinas(nombre_rutina: str, ejercicio_id: int) -> bool:
