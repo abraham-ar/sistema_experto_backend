@@ -318,5 +318,13 @@
     "repeticiones": "20-40 min",
     "objetivo": "Bajar de peso (obesidad)",
     "genero": "mujer"
+  },
+  {
+    "ejercicio": "Pull Ups",
+    "series": null,
+    "repeticiones": null,
+    "objetivo": "Ganar Masa Muscular",
+    "genero": "hombre",
+    "id": 41
   }
 ]

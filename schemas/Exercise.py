@@ -3,8 +3,8 @@ from typing import Optional, Literal
 
 class EjercicioBase(BaseModel):
     ejercicio: str = Field(..., example="Press de banca")
-    series: int = Field(..., example=4)
-    repeticiones: str = Field(..., example="8-10")
+    series: Optional[int] = Field(..., example=4)
+    repeticiones: Optional[str] = Field(..., example="8-10")
     objetivo: str = Field(..., example="Ganar Masa Muscular")
     genero: Literal["hombre", "mujer", "mixto"] = Field(..., example="hombre")
 
