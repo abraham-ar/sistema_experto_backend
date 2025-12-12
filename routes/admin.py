@@ -36,7 +36,7 @@ def listar_reglas(admin_id: str = Header(...), admin_user: str = Header(...)):
 #   POST /admin/rules
 # ============================================
 
-@admin.post("rules", response_model=RuleResponse)
+@admin.post("/rules", response_model=RuleResponse)
 def crear_regla(data: RuleCreate, admin_id: str = Header(...), admin_user: str = Header(...)):
     validar_admin(admin_id, admin_user)
 
@@ -53,7 +53,7 @@ def crear_regla(data: RuleCreate, admin_id: str = Header(...), admin_user: str =
 #   PUT /admin/rules/{id}
 # ============================================
 
-@admin.put("rules/{id}", response_model=RuleResponse)
+@admin.put("/rules/{id}", response_model=RuleResponse)
 def modificar_regla(id: int, datos: RuleUpdate, admin_id: str = Header(...), admin_user: str = Header(...)):
     validar_admin(admin_id, admin_user)
 
@@ -176,7 +176,7 @@ def crear_rutina(data: RutinaCreate, admin_id: str = Header(...), admin_user: st
 #   PUT /admin/routines/{rutina}
 # =======================================================
 
-@admin.put("routines/{rutina}", response_model=RutinaResponse)
+@admin.put("/routines/{rutina}", response_model=RutinaResponse)
 def modificar_rutina(rutina: str, cambios: RutinaUpdate, admin_id: str = Header(...), admin_user: str = Header(...)):
     validar_admin(admin_id, admin_user)
 
@@ -201,7 +201,7 @@ def modificar_rutina(rutina: str, cambios: RutinaUpdate, admin_id: str = Header(
 #   DELETE /admin/routines/{rutina}
 # =======================================================
 
-@admin.delete("routines/{rutina}")
+@admin.delete("/routines/{rutina}")
 def eliminar_rutina(rutina: str, admin_id: str = Header(...), admin_user: str = Header(...)):
     validar_admin(admin_id, admin_user)
 
@@ -217,7 +217,7 @@ def eliminar_rutina(rutina: str, admin_id: str = Header(...), admin_user: str = 
 # POST /admin/routines/{rutina}/exercises
 # =====================================================
 
-@admin.post("routines/{rutina}/exercises")
+@admin.post("/routines/{rutina}/exercises")
 def agregar_ejercicio(
     rutina: str,
     data: EjercicioCreate,
@@ -248,7 +248,7 @@ def agregar_ejercicio(
 # DELETE /admin/routines/{rutina}/exercises/{exercise_id}
 # =====================================================
 
-@admin.delete("routines/{rutina}/exercises/{exercise_id}")
+@admin.delete("/routines/{rutina}/exercises/{exercise_id}")
 def eliminar_ejercicio(
     rutina: str,
     exercise_id: int,
