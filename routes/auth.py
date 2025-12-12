@@ -101,8 +101,7 @@ async def login_usuario(
     return UsuarioLoginResponse(
         id=usuario.id,
         nombre=usuario.nombre,
-        correo=usuario.correo,
-        genero=usuario.genero
+        correo=usuario.correo
         #token=token_data.get("access_token")
     )
 

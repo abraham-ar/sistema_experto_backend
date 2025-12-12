@@ -35,7 +35,6 @@ class UsuarioLoginResponse(BaseModel):
     id: int
     nombre: str
     correo: EmailStr
-    genero: str
     token: Optional[str] = None  # JWT token si aplica
 
     model_config = {"from_attributes": True}
@@ -69,9 +68,9 @@ class UsuarioProfile(BaseModel):
     id: int
     nombre: str
     correo: EmailStr
-    peso: float
-    altura: float
-    genero: str
+    peso: Optional[float] = None
+    altura: Optional[float] = None
+    genero: Optional[str] = None
     imc: Optional[float] = None
     categoria_imc: Optional[str] = None
     rutina_asignada: Optional[str] = None
