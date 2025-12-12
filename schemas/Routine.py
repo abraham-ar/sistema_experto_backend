@@ -31,3 +31,7 @@ class RutinaResponse(BaseModel):
 
     class Config:
         orm_mode = True
+
+class RutinaEjerciciosResponse(BaseModel):
+    rutina: str
+    ejercicios: list[dict]

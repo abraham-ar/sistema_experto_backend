@@ -7,6 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from services import services
 from passlib.hash import bcrypt
 import logging
+from routes import engine as user_engine
 
 #creación del usuario Admin
 def crear_usuario_principal():
@@ -51,3 +52,4 @@ app.add_middleware(
 
 app.include_router(auth)
 app.include_router(admin)
+app.include_router(user_engine)
