@@ -30,7 +30,9 @@ def crear_usuario_principal():
 # Configura los orígenes permitidos en este caso donde se se encuentra el front
 origins = [
     "http://localhost:5500",
-    "http://127.0.0.1:5500"
+    "http://127.0.0.1:5500",
+    "http://127.0.0.1:5501",
+    "http://localhost:5501",
 ]
 
 services.create_database()
