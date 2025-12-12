@@ -1,10 +1,10 @@
 from fastapi import FastAPI, Depends
-from routes import auth, estudiante, rfid, estudiante, credencial, registros
+from routes import auth, admin
 from config.db import Base, engine, SessionLocal
 from sqlalchemy.orm import Session
 from models import Administrador
 from fastapi.middleware.cors import CORSMiddleware
-import services
+from services import services
 from passlib.hash import bcrypt
 import logging
 
@@ -16,7 +16,7 @@ def crear_usuario_principal():
         if not admin:
             nuevo_admin = Administrador(
                 usuario="Admin",
-                hashed_password = bcrypt.hash("Admin123"),
+                password_hash = bcrypt.hash("Admin123"),
                 nombre="Administrador Principal"
             )
             db.add(nuevo_admin)
@@ -48,3 +48,4 @@ app.add_middleware(
 )
 
 app.include_router(auth)
+app.include_router(admin)

@@ -155,9 +155,3 @@ async def register_usuario(
         correo=nuevo_usuario.correo
         #token=token_data.get("access_token")
     )
-
-
-@auth.get("/auth/me")
-async def auth_me(user=Depends(_services.require_user)):
-    """Endpoint para obtener datos del usuario autenticado"""
-    return user

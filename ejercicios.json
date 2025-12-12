@@ -1,0 +1,51 @@
+[
+  {"id": 1, "ejercicio": "Press de banca", "series": 4, "repeticiones": "8-10", "objetivo": "Ganar Masa Muscular", "genero": "hombre" },
+  {"id": 2, "ejercicio": "Remo con barra", "series": 4, "repeticiones": "8-10", "objetivo": "Ganar Masa Muscular", "genero": "hombre"  },
+  {"id": 3, "ejercicio": "Sentadilla", "series": 4, "repeticiones": "8-10", "objetivo": "Ganar Masa Muscular", "genero": "hombre"  },
+  {"id": 4, "ejercicio": "Peso muerto rumano", "series": 3, "repeticiones": "10", "objetivo": "Ganar Masa Muscular", "genero": "hombre"  },
+
+  {"id": 5, "ejercicio": "Press inclinado mancuerna", "series": 4, "repeticiones": "10-12", "objetivo": "Ganar Masa Muscular", "genero": "mujer"  },
+  {"id": 6, "ejercicio": "Remo con mancuerna", "series": 4, "repeticiones": "10-12", "objetivo": "Ganar Masa Muscular", "genero": "mujer"  },
+  {"id": 7, "ejercicio": "Prensa", "series": 4, "repeticiones": "12", "objetivo": "Ganar Masa Muscular", "genero": "mujer"  },
+  {"id": 8, "ejercicio": "Elevación de glúteo", "series": 3, "repeticiones": "15", "objetivo": "Ganar Masa Muscular", "genero": "mujer"  },
+
+  {"id": 9, "ejercicio": "Sentadilla", "series": 3, "repeticiones": "10", "objetivo": "Mantener Peso", "genero": "hombre"  },
+  {"id": 10, "ejercicio": "Press pecho", "series": 3, "repeticiones": "10",  "objetivo": "Mantener Peso", "genero": "hombre"  },
+  {"id": 11, "ejercicio": "Remo", "series": 3, "repeticiones": "10",  "objetivo": "Mantener Peso", "genero": "hombre"  },
+  {"id": 12, "ejercicio": "Plancha", "series": 3, "repeticiones": "40s",  "objetivo": "Mantener Peso", "genero": "hombre"  },
+
+  {"id": 13, "ejercicio": "Sentadilla ligera", "series": 3, "repeticiones": "12",  "objetivo": "Mantener Peso", "genero": "mujer"  },
+  {"id": 14, "ejercicio": "Press mancuerna", "series": 3, "repeticiones": "12", "objetivo":"Mantener Peso", "genero":"mujer"  },
+  {"id": 15, "ejercicio": "Remo banda", "series": 3, "repeticiones": "15", "objetivo":"Mantener Peso", "genero":"mujer"  },
+  {"id": 16, "ejercicio": "Plancha", "series": 3, "repeticiones": "30s", "objetivo":"Mantener Peso", "genero":"mujer"  },
+
+  {"id": 17, "ejercicio": "Press pecho", "series": 3, "repeticiones": "12-15", "objetivo":"Tonificar", "genero":"hombre" },
+  {"id": 18, "ejercicio": "Elevaciones laterales", "series": 3, "repeticiones": "20", "objetivo":"Tonificar", "genero":"hombre" },
+  {"id": 19, "ejercicio": "Curl bíceps", "series": 3, "repeticiones": "15", "objetivo":"Tonificar", "genero":"hombre" },
+  {"id": 20, "ejercicio": "Tríceps polea", "series": 3, "repeticiones": "15-20", "objetivo":"Tonificar", "genero":"hombre" },
+
+  {"id": 21, "ejercicio": "Press mancuerna", "series": 3, "repeticiones": "15", "objetivo":"Tonificar", "genero":"mujer" },
+  {"id": 22, "ejercicio": "Aperturas", "series": 3, "repeticiones": "20", "objetivo":"Tonificar", "genero":"mujer"  },
+  {"id": 23, "ejercicio": "Glúteo puente", "series": 3, "repeticiones": "20", "objetivo":"Tonificar", "genero":"mujer"  },
+  {"id": 24, "ejercicio": "Abdominales", "series": 3, "repeticiones": "20", "objetivo":"Tonificar", "genero":"mujer"  },
+
+  {"id": 25, "ejercicio": "Sentadilla ligera", "series": 3, "repeticiones": "12", "objetivo":"Bajar de peso (sobrepeso)", "genero": "hombre" },
+  {"id": 26, "ejercicio": "Remo banda", "series": 3, "repeticiones": "12", "objetivo":"Bajar de peso (sobrepeso)", "genero": "hombre" },
+  {"id": 27, "ejercicio": "Press máquina", "series": 3, "repeticiones": "12", "objetivo":"Bajar de peso (sobrepeso)", "genero": "hombre" },
+  {"id": 28, "ejercicio": "Caminadora", "series": 0, "repeticiones": "20-30 min", "objetivo":"Bajar de peso (sobrepeso)", "genero": "hombre" },
+
+  {"id": 29, "ejercicio": "Sentadilla asistida", "series": 3, "repeticiones": "12", "objetivo":"Bajar de peso (sobrepeso)", "genero": "mujer" },
+  {"id": 30, "ejercicio": "Press ligero", "series": 3, "repeticiones": "15", "objetivo":"Bajar de peso (sobrepeso)", "genero": "mujer" },
+  {"id": 31, "ejercicio": "Banda elástica remo", "series": 3, "repeticiones": "15", "objetivo":"Bajar de peso (sobrepeso)", "genero": "mujer" },
+  {"id": 32, "ejercicio": "Caminadora", "series": 0, "repeticiones": "20-30 min", "objetivo":"Bajar de peso (sobrepeso)", "genero": "mujer" },
+
+  {"id": 33, "ejercicio": "Sentadilla en silla", "series": 3, "repeticiones": "10", "objetivo":"Bajar de peso (obesidad)", "genero": "hombre" },
+  {"id": 34, "ejercicio": "Remo banda", "series": 3, "repeticiones": "12", "objetivo":"Bajar de peso (obesidad)", "genero": "hombre" },
+  {"id": 35, "ejercicio": "Press banda", "series": 3, "repeticiones": "12", "objetivo":"Bajar de peso (obesidad)", "genero": "hombre" },
+  {"id": 36, "ejercicio": "Caminata", "series": 0, "repeticiones": "20-40 min", "objetivo":"Bajar de peso (obesidad)", "genero": "hombre" },
+
+  {"id": 37, "ejercicio": "Sentadilla con apoyo", "series": 3, "repeticiones": "10", "objetivo":"Bajar de peso (obesidad)", "genero": "mujer" },
+  {"id": 38, "ejercicio": "Elevación de pierna", "series": 3, "repeticiones": "12", "objetivo":"Bajar de peso (obesidad)", "genero": "mujer" },
+  {"id": 39, "ejercicio": "Press banda", "series": 3, "repeticiones": "12", "objetivo":"Bajar de peso (obesidad)", "genero": "mujer" },
+  {"id": 40, "ejercicio": "Elíptica", "series": 0, "repeticiones": "20-40 min", "objetivo":"Bajar de peso (obesidad)", "genero": "mujer" }
+]

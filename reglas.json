@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "condicion": "imc < 18.5",
+    "clasificacion": "Bajo peso"
+  },
+  {
+    "id": 2,
+    "condicion": "18.5 <= imc < 25",
+    "clasificacion": "Normal"
+  },
+  {
+    "id": 3,
+    "condicion": "25 <= imc < 30",
+    "clasificacion": "Sobrepeso"
+  },
+  {
+    "id": 4,
+    "condicion": "imc >= 30",
+    "clasificacion": "Obesidad"
+  }
+]
